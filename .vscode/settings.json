@@ -1,0 +1,16 @@
+{
+    "editor.insertSpaces": true,
+    "search.exclude": {
+        ".vscode": true,
+        "dist": true,
+        "node_modules": true
+    },
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": false,
+    "typescript.tsdk": "./node_modules/typescript/lib",
+    "editor.formatOnSave": true,
+    "html.format.enable": false,
+    "editor.formatOnPaste": false,
+    "prettier.prettierPath": "./node_modules/prettier",
+    "prettier.configPath": "./.prettierrc.json"
+}

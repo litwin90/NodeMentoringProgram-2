@@ -1,0 +1,12 @@
+{
+    "env": {
+        "ENV": "development",
+        "HOST": "localhost",
+        "PORT": "4000"
+    },
+    "ext": "ts",
+    "restartable": "rs",
+    "watch": [
+        "src"
+    ]
+}
