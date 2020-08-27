@@ -1,8 +1,6 @@
 {
     "env": {
-        "ENV": "development",
-        "HOST": "localhost",
-        "PORT": "4000"
+        "PORT": "3000"
     },
     "ext": "ts",
     "restartable": "rs",

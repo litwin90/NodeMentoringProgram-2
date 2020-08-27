@@ -1,0 +1,30 @@
+{
+  "$ref": "#/definitions/PartialUser",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "PartialUser": {
+      "additionalProperties": false,
+      "properties": {
+        "age": {
+          "maximum": 130,
+          "minimum": 4,
+          "type": "number"
+        },
+        "isDeleted": {
+          "type": "boolean"
+        },
+        "login": {
+          "maxLength": 24,
+          "minLength": 5,
+          "pattern": "^[\\w.-]{0,19}[0-9a-zA-Z]$",
+          "type": "string"
+        },
+        "password": {
+          "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

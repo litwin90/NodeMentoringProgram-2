@@ -17,6 +17,8 @@
         "outDir": "dist/",
         "lib": ["dom", "es6", "es2016.array.include", "es2017"],
         "typeRoots": [ "./typings", "./node_modules/@types"],
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
     },
     "exclude": ["node_modules"],
     "compileOnSave": false,

@@ -1,12 +1,11 @@
-import * as express from 'express';
+import express from 'express';
+
+import { userRouter } from './routes';
 
 const app: express.Application = express();
 
-app.get('/', function (req, res) {
-    res.send('Hello World!');
-});
+app.use(express.json());
 
-app.listen(3000, function () {
-    console.log('App is listening on port 3000!');
-    console.log('http://localhost:3000');
-});
+app.listen(process.env.PORT);
+
+app.use('/user', userRouter);
