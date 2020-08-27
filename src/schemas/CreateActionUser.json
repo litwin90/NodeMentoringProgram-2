@@ -1,0 +1,39 @@
+{
+  "$ref": "#/definitions/CreateActionUser",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "CreateActionUser": {
+      "$ref": "#/definitions/Optional%3CIUser%2C%22id%22%3E"
+    },
+    "Optional<IUser,\"id\">": {
+      "additionalProperties": false,
+      "description": "Type helper for making certain fields of an object optional. This is helpful\nfor creating the `CreationAttributes` from your `Attributes` for a Model.",
+      "properties": {
+        "age": {
+          "maximum": 130,
+          "minimum": 4,
+          "type": "number"
+        },
+        "id": {
+          "type": "string"
+        },
+        "login": {
+          "maxLength": 24,
+          "minLength": 5,
+          "pattern": "^[\\w.-]{0,19}[0-9a-zA-Z]$",
+          "type": "string"
+        },
+        "password": {
+          "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "age",
+        "login",
+        "password"
+      ],
+      "type": "object"
+    }
+  }
+}
