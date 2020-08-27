@@ -3,7 +3,7 @@ import { Container } from 'typedi';
 
 import { UserService } from '../../services';
 import { HTTP_CODES } from '../constants';
-import { validateCreateActionUser, validateUpdateActionUser } from '../middlewares';
+import { UserMiddlewareService } from '../middlewares';
 
 const route = express.Router();
 
@@ -11,6 +11,7 @@ export const userRoute = (app: express.Router) => {
     app.use('/user', route);
 
     const userService = Container.get(UserService);
+    const userMiddlewareService = Container.get(UserMiddlewareService);
 
     route.get('/:id', async (req, res) => {
         try {
@@ -28,7 +29,7 @@ export const userRoute = (app: express.Router) => {
         }
     });
 
-    route.post('/', validateCreateActionUser, async (req, res) => {
+    route.post('/', userMiddlewareService.validateCreateActionUser, async (req, res) => {
         try {
             const newUser = await userService.createUser(req.body);
 
@@ -38,7 +39,7 @@ export const userRoute = (app: express.Router) => {
         }
     });
 
-    route.patch('/:id', validateUpdateActionUser, async (req, res) => {
+    route.patch('/:id', userMiddlewareService.validateUpdateActionUser, async (req, res) => {
         try {
             const userId = req.params.id;
 

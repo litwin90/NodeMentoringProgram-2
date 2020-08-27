@@ -1,11 +1,11 @@
 {
     "env": {
         "PORT": "3000",
-        "DB_HOST": "localhost",
-        "DB_USER": "postgres",
-        "DB_NAME": "postgres",
+        "DB_HOST": "dumbo.db.elephantsql.com",
+        "DB_USER": "skbhvecm",
+        "DB_NAME": "skbhvecm",
         "DB_PORT": 5432,
-        "DB_PASS": "1111",
+        "DB_PASS": "TX6ovqDnisTDfEWL4mkxNdup9fN_VX3O",
         "DB_DIALECT": "postgres"
     },
     "ext": "ts",
