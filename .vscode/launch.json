@@ -8,6 +8,12 @@
             "type": "node-terminal"
         },
         {
+            "command": "npm run init-users",
+            "name": "Init users",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
             "name": "Attach to Process",
             "type": "node",
             "request": "attach",

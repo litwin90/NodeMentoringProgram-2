@@ -1,17 +1,14 @@
 {
-  "$ref": "#/definitions/PartialUser",
+  "$ref": "#/definitions/UpdateActionUser",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
-    "PartialUser": {
+    "UpdateActionUser": {
       "additionalProperties": false,
       "properties": {
         "age": {
           "maximum": 130,
           "minimum": 4,
           "type": "number"
-        },
-        "isDeleted": {
-          "type": "boolean"
         },
         "login": {
           "maxLength": 24,

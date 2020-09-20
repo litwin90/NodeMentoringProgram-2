@@ -1,14 +1,21 @@
 {
-  "$ref": "#/definitions/UserToValidate",
+  "$ref": "#/definitions/CreateActionUser",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "definitions": {
-    "UserToValidate": {
+    "CreateActionUser": {
+      "$ref": "#/definitions/Optional%3CIUser%2C%22id%22%3E"
+    },
+    "Optional<IUser,\"id\">": {
       "additionalProperties": false,
+      "description": "Type helper for making certain fields of an object optional. This is helpful\nfor creating the `CreationAttributes` from your `Attributes` for a Model.",
       "properties": {
         "age": {
           "maximum": 130,
           "minimum": 4,
           "type": "number"
+        },
+        "id": {
+          "type": "string"
         },
         "login": {
           "maxLength": 24,
@@ -22,9 +29,9 @@
         }
       },
       "required": [
+        "age",
         "login",
-        "password",
-        "age"
+        "password"
       ],
       "type": "object"
     }

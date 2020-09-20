@@ -1,3 +1,5 @@
+import { Optional } from 'sequelize';
+
 export interface IUser {
     id: string;
     /**
@@ -15,8 +17,7 @@ export interface IUser {
      * @maximum 130
      */
     age: number;
-    isDeleted: boolean;
 }
 
-export type UserToValidate = Omit<IUser, 'id' | 'isDeleted'>;
-export type PartialUser = Partial<UserToValidate> & Partial<Pick<IUser, 'isDeleted'>>;
+export type CreateActionUser = Optional<IUser, 'id'>;
+export type UpdateActionUser = Omit<Optional<IUser, 'age' | 'login' | 'password'>, 'id'>;
