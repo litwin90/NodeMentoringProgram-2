@@ -8,8 +8,8 @@
             "type": "node-terminal"
         },
         {
-            "command": "npm run init-users",
-            "name": "Init users",
+            "command": "npm run generate-initial-data",
+            "name": "Genearte data",
             "request": "launch",
             "type": "node-terminal"
         },

@@ -9,9 +9,11 @@ export const Config = {
         port: Number(process.env.DB_PORT),
         password: process.env.DB_PASS,
         dialect: process.env.DB_DIALECT as Dialect,
+        namespace: 'app-namespace',
     },
     injectionToken: {
-        userModel: 'userModel',
         sequelize: 'sequelize',
+        userModel: 'userModel',
+        groupModel: 'groupModel',
     },
 };

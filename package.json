@@ -5,13 +5,17 @@
     "main": "index.js",
     "scripts": {
         "start": "nodemon  src/app.ts",
-        "init-users": "nodemon scripts/init-users.ts",
+        "generate-initial-data": "nodemon scripts/generate-initial-data.ts",
         "test": "test",
         "tsc": "tsc",
         "lint": "eslint . --ext .ts",
+        "generate-json-schema:All": "npm-run-all generate-json-schema:User generate-json-schema:Group",
         "generate-json-schema:User": "npm-run-all generate-json-schema:UpdateActionUser generate-json-schema:CreateActionUser",
+        "generate-json-schema:Group": "npm-run-all generate-json-schema:UpdateActionGroup generate-json-schema:CreateActionGroup",
         "generate-json-schema:UpdateActionUser": "ts-json-schema-generator --no-type-check --path src/interfaces/IUser.ts -t UpdateActionUser > src/schemas/UpdateActionUser.json",
-        "generate-json-schema:CreateActionUser": "ts-json-schema-generator --no-type-check --path src/interfaces/IUser.ts -t CreateActionUser > src/schemas/CreateActionUser.json"
+        "generate-json-schema:CreateActionUser": "ts-json-schema-generator --no-type-check --path src/interfaces/IUser.ts -t CreateActionUser > src/schemas/CreateActionUser.json",
+        "generate-json-schema:UpdateActionGroup": "ts-json-schema-generator --no-type-check --path src/interfaces/IGroup.ts -t UpdateActionGroup > src/schemas/UpdateActionGroup.json",
+        "generate-json-schema:CreateActionGroup": "ts-json-schema-generator --no-type-check --path src/interfaces/IGroup.ts -t CreateActionGroup > src/schemas/CreateActionGroup.json"
     },
     "repository": {
         "type": "git",
@@ -26,6 +30,7 @@
     "devDependencies": {
         "@types/ajv": "^1.0.0",
         "@types/ajv-merge-patch": "^4.1.0",
+        "@types/cls-hooked": "^4.3.1",
         "@types/express": "^4.17.7",
         "@types/node": "^14.10.1",
         "@types/pg": "^7.14.4",
@@ -45,6 +50,7 @@
     },
     "dependencies": {
         "ajv": "^6.12.4",
+        "cls-hooked": "^4.2.2",
         "express": "^4.17.1",
         "pg": "^8.3.3",
         "reflect-metadata": "^0.1.13",

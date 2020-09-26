@@ -10,17 +10,17 @@ export class UserService {
     constructor(@Inject(Config.injectionToken.userModel) private userModel: ModelCtor<IUserInstance>) {}
 
     async getUserById(id: string) {
-        return this.userModel.findOne({ where: { id } });
+        return await this.userModel.findOne({ where: { id } });
     }
 
     async createUser(createActionUser: CreateActionUser) {
-        return this.userModel.create({
+        return await this.userModel.create({
             ...createActionUser,
         });
     }
 
     async updateUser(userId: string, updateActionUser: UpdateActionUser) {
-        return this.userModel.update(
+        return await this.userModel.update(
             {
                 ...updateActionUser,
             },
@@ -33,7 +33,7 @@ export class UserService {
     }
 
     async deleteUser(userId: string) {
-        return this.userModel.destroy({
+        return await this.userModel.destroy({
             where: {
                 id: userId,
             },
@@ -41,7 +41,7 @@ export class UserService {
     }
 
     async autoSuggest(loginSubstring: string, limit: number) {
-        return this.userModel.findAll({
+        return await this.userModel.findAll({
             where: {
                 login: {
                     [Op.substring]: loginSubstring,
