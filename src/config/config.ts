@@ -1,7 +1,8 @@
 import { Dialect } from 'sequelize';
 
 export const Config = {
-    port: process.env.PORT,
+    port: Number(process.env.PORT),
+    host: process.env.HOST as string,
     database: {
         host: process.env.DB_HOST,
         username: process.env.DB_USER,
@@ -13,7 +14,9 @@ export const Config = {
     },
     injectionToken: {
         sequelize: 'sequelize',
-        userModel: 'userModel',
-        groupModel: 'groupModel',
+        model: {
+            user: 'userModel',
+            group: 'groupModel',
+        },
     },
 };

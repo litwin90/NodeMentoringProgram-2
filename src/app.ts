@@ -6,16 +6,22 @@ import 'reflect-metadata';
 
 import { Config } from './config';
 import { appLoaders } from './loaders';
+import { commonLogger } from './logger';
 
 async function startServer() {
     try {
+        commonLogger.info('Start Application');
         const app: express.Application = express();
 
+        commonLogger.info('Init loaders');
         await appLoaders({ app });
+        commonLogger.info('Loaders initiated');
 
-        app.listen(Config.port);
+        app.listen(Config.port, Config.host, () => {
+            commonLogger.info(`Running server at ${Config.host}:${Config.port}`);
+        });
     } catch (error) {
-        console.log(`Unable to start app , error: ${error}`);
+        commonLogger.error(`Unable to start app , error: ${error}`);
     }
 }
 
@@ -24,8 +30,9 @@ async function closeServer() {
         const sequelize = Container.get(Config.injectionToken.sequelize) as Sequelize;
 
         await sequelize.close();
+        commonLogger.info('App is stopped');
     } catch (error) {
-        console.log(error);
+        commonLogger.error(error);
     }
 }
 
@@ -34,13 +41,14 @@ function bindProcessEventsHandlers() {
         await closeServer();
     });
     process.on('SIGINT', async () => {
-        console.log('SIGINT');
         await closeServer();
     });
-    process.on('uncaughtException', async () => {
+    process.on('uncaughtException', async (error: Error) => {
+        commonLogger.error(error);
         await closeServer();
     });
-    process.on('unhandledRejection', async () => {
+    process.on('unhandledRejection', async (error: Error) => {
+        commonLogger.error(error);
         await closeServer();
     });
 }

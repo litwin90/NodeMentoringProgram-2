@@ -4,7 +4,7 @@ import { Service } from 'typedi';
 
 import CreateActionUserSchema from '../../schemas/CreateActionUser.json';
 import UpdateActionUserSchema from '../../schemas/UpdateActionUser.json';
-import { HTTP_CODES } from '../constants';
+import { HttpCode } from '../constants';
 
 const ajv = new Ajv();
 
@@ -17,13 +17,13 @@ export class UserMiddlewareService {
         if (isValidCreateActionUser(req.body)) {
             return next();
         }
-        return res.status(HTTP_CODES.BAD_REQUEST).json({ validationErrors: isValidCreateActionUser.errors });
+        return res.status(HttpCode.BAD_REQUEST).json({ validationErrors: isValidCreateActionUser.errors });
     }
 
     validateUpdateActionUser(req: express.Request, res: express.Response, next: express.NextFunction) {
         if (isValidUpdateActionUser(req.body)) {
             return next();
         }
-        return res.status(HTTP_CODES.BAD_REQUEST).json({ validationErrors: isValidUpdateActionUser.errors });
+        return res.status(HttpCode.BAD_REQUEST).json({ validationErrors: isValidUpdateActionUser.errors });
     }
 }
