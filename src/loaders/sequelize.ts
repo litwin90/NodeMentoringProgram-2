@@ -3,6 +3,7 @@ import { Sequelize } from 'sequelize';
 import Container from 'typedi';
 
 import { Config } from '../config';
+import { sequelizeLogger } from '../logger';
 import { getGroupModel, getUserGroupModel, getUserModel } from '../models';
 
 const namespace = cls.createNamespace(Config.database.namespace);
@@ -22,7 +23,7 @@ export const sequelizeLoader = async ({ forceSync }: { forceSync: boolean }) => 
         });
 
         await sequelize.authenticate();
-        console.log('Connection to database has been established successfully.');
+        sequelizeLogger.info('Connection to database has been established successfully.');
 
         Container.set(Config.injectionToken.sequelize, sequelize);
 
@@ -33,11 +34,12 @@ export const sequelizeLoader = async ({ forceSync }: { forceSync: boolean }) => 
         UserModel.belongsToMany(GroupModel, { through: UserGroupModel });
         GroupModel.belongsToMany(UserModel, { through: UserGroupModel });
 
-        Container.set(Config.injectionToken.groupModel, GroupModel);
-        Container.set(Config.injectionToken.userModel, UserModel);
+        Container.set(Config.injectionToken.model.group, GroupModel);
+        Container.set(Config.injectionToken.model.user, UserModel);
 
         await sequelize.sync({ force: forceSync });
+        sequelizeLogger.info('Database is synced with models');
     } catch (error) {
-        console.error('Unable to connect to the database:', error);
+        sequelizeLogger.error('Unable to connect to the database:', error);
     }
 };

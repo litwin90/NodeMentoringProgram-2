@@ -1,5 +1,6 @@
 {
     "env": {
+        "HOST": "localhost",
         "PORT": "3000",
         "DB_HOST": "dumbo.db.elephantsql.com",
         "DB_USER": "skbhvecm",

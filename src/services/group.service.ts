@@ -7,7 +7,7 @@ import { IGroupInstance } from '../models';
 
 @Service()
 export class GroupService {
-    constructor(@Inject(Config.injectionToken.groupModel) private groupModel: ModelCtor<IGroupInstance>) {}
+    constructor(@Inject(Config.injectionToken.model.group) private groupModel: ModelCtor<IGroupInstance>) {}
 
     async getGroupById(id: string) {
         return this.groupModel.findOne({ where: { id } });

@@ -7,7 +7,7 @@ import { IUserInstance } from '../models';
 
 @Service()
 export class UserService {
-    constructor(@Inject(Config.injectionToken.userModel) private userModel: ModelCtor<IUserInstance>) {}
+    constructor(@Inject(Config.injectionToken.model.user) private userModel: ModelCtor<IUserInstance>) {}
 
     async getUserById(id: string) {
         return await this.userModel.findOne({ where: { id } });

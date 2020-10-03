@@ -9,8 +9,8 @@ import { EntitiesOperationStatus } from './models';
 @Service()
 export class UserGroupService {
     constructor(
-        @Inject(Config.injectionToken.groupModel) private groupModel: ModelCtor<IGroupInstance>,
-        @Inject(Config.injectionToken.userModel) private userModel: ModelCtor<IUserInstance>,
+        @Inject(Config.injectionToken.model.group) private groupModel: ModelCtor<IGroupInstance>,
+        @Inject(Config.injectionToken.model.user) private userModel: ModelCtor<IUserInstance>,
         @Inject(Config.injectionToken.sequelize) private sequelize: Sequelize,
     ) {}
 

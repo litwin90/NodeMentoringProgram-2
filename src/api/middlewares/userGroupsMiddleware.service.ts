@@ -1,7 +1,7 @@
 import express from 'express';
 import { Service } from 'typedi';
 
-import { HTTP_CODES } from '../constants';
+import { HttpCode } from '../constants';
 
 @Service()
 export class UserGroupsMiddlewareService {
@@ -17,7 +17,7 @@ export class UserGroupsMiddlewareService {
         }
 
         if (validationErrors.length) {
-            return res.status(HTTP_CODES.BAD_REQUEST).json({ validationErrors });
+            return res.status(HttpCode.BAD_REQUEST).json({ validationErrors });
         }
 
         return next();
