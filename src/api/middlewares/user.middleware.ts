@@ -17,13 +17,13 @@ export class UserMiddlewareService {
         if (isValidCreateActionUser(req.body)) {
             return next();
         }
-        return res.status(HttpCode.BAD_REQUEST).json({ validationErrors: isValidCreateActionUser.errors });
+        return res.status(HttpCode.BadRequest).json({ validationErrors: isValidCreateActionUser.errors });
     }
 
     validateUpdateActionUser(req: express.Request, res: express.Response, next: express.NextFunction) {
         if (isValidUpdateActionUser(req.body)) {
             return next();
         }
-        return res.status(HttpCode.BAD_REQUEST).json({ validationErrors: isValidUpdateActionUser.errors });
+        return res.status(HttpCode.BadRequest).json({ validationErrors: isValidUpdateActionUser.errors });
     }
 }

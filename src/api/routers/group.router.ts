@@ -1,24 +1,24 @@
-import * as express from 'express';
+import { Router } from 'express';
 import { Container } from 'typedi';
 
 import { GroupController } from '../controllers';
 import { GroupMiddlewareService } from '../middlewares';
 
-const route = express.Router();
+const groupRoute = Router();
 
-export const groupRouter = (app: express.Router) => {
-    app.use('/group', route);
+export const groupRouter = (app: Router, appRouteName: string) => {
+    app.use(appRouteName, groupRoute);
 
     const { getGroups, getGroupById, createGroup, updateGroup, deleteGroup } = Container.get(GroupController);
     const { validateCreateActionGroup, validateUpdateActionGroup } = Container.get(GroupMiddlewareService);
 
-    route.get('/', getGroups);
+    groupRoute.get('/', getGroups);
 
-    route.get('/:id', getGroupById);
+    groupRoute.get('/:id', getGroupById);
 
-    route.post('/', validateCreateActionGroup, createGroup);
+    groupRoute.post('/', validateCreateActionGroup, createGroup);
 
-    route.patch('/:id', validateUpdateActionGroup, updateGroup);
+    groupRoute.patch('/:id', validateUpdateActionGroup, updateGroup);
 
-    route.delete('/:id', deleteGroup);
+    groupRoute.delete('/:id', deleteGroup);
 };

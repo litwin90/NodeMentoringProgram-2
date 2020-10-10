@@ -13,6 +13,10 @@ export class UserService {
         return await this.userModel.findOne({ where: { id } });
     }
 
+    async getUserByLogin(login: string) {
+        return await this.userModel.findOne({ where: { login } });
+    }
+
     async createUser(createActionUser: CreateActionUser) {
         return await this.userModel.create({
             ...createActionUser,

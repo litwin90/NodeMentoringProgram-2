@@ -17,13 +17,13 @@ export class GroupMiddlewareService {
         if (isValidCreateActionGroup(req.body)) {
             return next();
         }
-        return res.status(HttpCode.BAD_REQUEST).json({ validationErrors: isValidCreateActionGroup.errors });
+        return res.status(HttpCode.BadRequest).json({ validationErrors: isValidCreateActionGroup.errors });
     }
 
     validateUpdateActionGroup(req: express.Request, res: express.Response, next: express.NextFunction) {
         if (isValidUpdateActionGroup(req.body)) {
             return next();
         }
-        return res.status(HttpCode.BAD_REQUEST).json({ validationErrors: isValidUpdateActionGroup.errors });
+        return res.status(HttpCode.BadRequest).json({ validationErrors: isValidUpdateActionGroup.errors });
     }
 }

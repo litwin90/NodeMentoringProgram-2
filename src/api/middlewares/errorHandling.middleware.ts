@@ -8,6 +8,6 @@ import { HttpCode, HttpMessage } from '../constants';
 @Service()
 export class ErrorHandlingMiddlewareService {
     unhandledErrorsMiddleware(error: Error, req: express.Request, res: express.Response, next: express.NextFunction) {
-        res.status(HttpCode.INTERNAL_SERVER_ERROR).send(HttpMessage.INTERNAL_SERVER_ERROR);
+        res.status(HttpCode.InternalServerError).send(HttpMessage.InternalServerError);
     }
 }

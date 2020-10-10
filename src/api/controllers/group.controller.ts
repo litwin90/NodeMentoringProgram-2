@@ -14,7 +14,7 @@ export class GroupController {
     async getGroups(req: Request, res: Response) {
         const groups = await this.groupService.getAllGroups();
 
-        res.status(HttpCode.OK).json(groups);
+        return res.status(HttpCode.Ok).json(groups);
     }
 
     @LogRequestData()
@@ -25,10 +25,9 @@ export class GroupController {
         const group = await this.groupService.getGroupById(groupId);
 
         if (!group) {
-            res.status(HttpCode.NOT_FOUND).send(`Group with id: ${groupId} not found`);
-            return;
+            return res.status(HttpCode.NotFound).send(`Group with id: ${groupId} not found`);
         }
-        res.status(HttpCode.OK).json(group);
+        return res.status(HttpCode.Ok).json(group);
     }
 
     @LogRequestData()
@@ -36,7 +35,7 @@ export class GroupController {
     async createGroup(req: Request, res: Response) {
         const newGroup = await this.groupService.creatGroup(req.body);
 
-        res.status(HttpCode.OK).json(newGroup);
+        return res.status(HttpCode.Ok).json(newGroup);
     }
 
     @LogRequestData()
@@ -48,16 +47,14 @@ export class GroupController {
 
         switch (updatedDocumentsCount) {
             case 1:
-                res.status(HttpCode.OK).send(`Group id: ${groupId} is updated`);
-                break;
+                return res.status(HttpCode.Ok).send(`Group id: ${groupId} is updated`);
+
             case 0:
-                res.status(HttpCode.NOT_FOUND).send(`Group with id: ${groupId} not found`);
-                break;
+                return res.status(HttpCode.NotFound).send(`Group with id: ${groupId} not found`);
             default:
-                res.status(HttpCode.INTERNAL_SERVER_ERROR).send(
-                    `Smth went wrong. Updated documents count: ${updatedDocumentsCount}`,
-                );
-                break;
+                return res
+                    .status(HttpCode.InternalServerError)
+                    .send(`Smth went wrong. Updated documents count: ${updatedDocumentsCount}`);
         }
     }
 
@@ -69,16 +66,13 @@ export class GroupController {
 
         switch (deletedDocumentsCount) {
             case 1:
-                res.status(HttpCode.OK).send(`Group id: ${groupId} is deleted`);
-                break;
+                return res.status(HttpCode.Ok).send(`Group id: ${groupId} is deleted`);
             case 0:
-                res.status(HttpCode.NOT_FOUND).send(`Group with id: ${groupId} not found`);
-                break;
+                return res.status(HttpCode.NotFound).send(`Group with id: ${groupId} not found`);
             default:
-                res.status(HttpCode.INTERNAL_SERVER_ERROR).send(
-                    `Smth went wrong. Deleted documents count: ${deletedDocumentsCount}`,
-                );
-                break;
+                return res
+                    .status(HttpCode.InternalServerError)
+                    .send(`Smth went wrong. Deleted documents count: ${deletedDocumentsCount}`);
         }
     }
 }

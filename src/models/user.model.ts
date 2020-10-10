@@ -1,8 +1,14 @@
-import { DataTypes, Model, Sequelize, UUIDV4 } from 'sequelize';
+import {
+    DataTypes, HasManyCreateAssociationMixin, HasManyGetAssociationsMixin, Model, Sequelize, UUIDV4,
+} from 'sequelize';
 
 import { CreateActionUser, IUser } from '../interfaces';
+import { IRefreshTokenInstance } from './refreshToken';
 
-export interface IUserInstance extends Model<IUser, CreateActionUser>, IUser {}
+export interface IUserInstance extends Model<IUser, CreateActionUser>, IUser {
+    createRefreshToken: HasManyCreateAssociationMixin<IRefreshTokenInstance>;
+    getRefreshTokens: HasManyGetAssociationsMixin<IRefreshTokenInstance>;
+}
 
 export const getUserModel = (sequelize: Sequelize) =>
     sequelize.define<IUserInstance>(

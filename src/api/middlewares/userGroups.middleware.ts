@@ -17,7 +17,7 @@ export class UserGroupsMiddlewareService {
         }
 
         if (validationErrors.length) {
-            return res.status(HttpCode.BAD_REQUEST).json({ validationErrors });
+            return res.status(HttpCode.BadRequest).json({ validationErrors });
         }
 
         return next();

@@ -15,14 +15,14 @@ export function HandleError() {
                 const methodName = propertyKey;
                 const controllerName = target.constructor.name;
 
-                originalMethod.apply(context, [req, res, next]).catch((error: Error) => {
+                return originalMethod.apply(context, [req, res, next]).catch((error: Error) => {
                     const errorObject = {
                         controller: controllerName,
                         method: methodName,
                         arguments: req.body,
                         error,
                     };
-                    apiLogger.error(errorObject);
+                    apiLogger.error(JSON.stringify(errorObject, null, 4));
                     return next(error);
                 });
             };

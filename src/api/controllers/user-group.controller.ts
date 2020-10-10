@@ -17,11 +17,10 @@ export class UserGroupController {
         const result = await this.userGroupService.addUsersToGroup(groupId, usersIds);
 
         if (result === EntitiesOperationStatus.Failure) {
-            res.status(HttpCode.INTERNAL_SERVER_ERROR).send(
-                `Unable to add users (ids: ${usersIds}) to group (id: ${groupId})`,
-            );
-            return;
+            return res
+                .status(HttpCode.InternalServerError)
+                .send(`Unable to add users (ids: ${usersIds}) to group (id: ${groupId})`);
         }
-        res.status(HttpCode.OK).send(`Users (ids: ${usersIds}) added to group (id: ${groupId})`);
+        return res.status(HttpCode.Ok).send(`Users (ids: ${usersIds}) added to group (id: ${groupId})`);
     }
 }

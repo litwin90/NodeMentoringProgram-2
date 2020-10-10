@@ -15,13 +15,13 @@ export function LogRequestData() {
                 const methodName = propertyKey;
                 const controllerName = target.constructor.name as string;
 
-                originalMethod.apply(context, [req, res, next]).then(() => {
+                return originalMethod.apply(context, [req, res, next]).then(() => {
                     const requestData = {
                         controller: controllerName,
                         method: methodName,
                         arguments: { ...req.body, ...req.params },
                     };
-                    apiLogger.info(requestData);
+                    apiLogger.info(JSON.stringify(requestData, null, 4));
                 });
             };
         }

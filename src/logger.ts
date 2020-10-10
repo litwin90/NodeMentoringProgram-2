@@ -18,5 +18,6 @@ const logger = Winston.createLogger({
 const commonLogger = logger.child({ module: 'common' });
 const apiLogger = logger.child({ module: 'api' });
 const sequelizeLogger = logger.child({ module: 'sequelize' });
+const generateDataLogger = logger.child({ module: 'generate-data' });
 
-export { apiLogger, commonLogger, sequelizeLogger };
+export { apiLogger, commonLogger, sequelizeLogger, generateDataLogger };
