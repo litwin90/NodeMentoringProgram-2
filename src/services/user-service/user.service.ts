@@ -1,9 +1,9 @@
 import { ModelCtor, Op } from 'sequelize';
 import { Inject, Service } from 'typedi';
 
-import { Config } from '../config';
-import { CreateActionUser, UpdateActionUser } from '../interfaces';
-import { IUserInstance } from '../models';
+import { Config } from '../../config';
+import { CreateActionUser, UpdateActionUser } from '../../interfaces';
+import { IUserInstance } from '../../models';
 
 @Service()
 export class UserService {

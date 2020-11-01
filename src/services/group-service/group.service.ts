@@ -1,9 +1,9 @@
 import { ModelCtor } from 'sequelize';
 import { Inject, Service } from 'typedi';
 
-import { Config } from '../config';
-import { CreateActionGroup, UpdateActionGroup } from '../interfaces';
-import { IGroupInstance } from '../models';
+import { Config } from '../../config';
+import { CreateActionGroup, UpdateActionGroup } from '../../interfaces';
+import { IGroupInstance } from '../../models';
 
 @Service()
 export class GroupService {

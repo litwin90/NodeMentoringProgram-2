@@ -1,5 +1,7 @@
 import * as Winston from 'winston';
 
+import { Config } from './config';
+
 const devFormat = Winston.format.printf(({ level, message, module }) => {
     return `${level} [${module}]: ${message}`;
 });
@@ -13,6 +15,7 @@ const logger = Winston.createLogger({
     level: 'info',
     format,
     transports: [new Winston.transports.Console()],
+    silent: !Config.isLoggingEnabled,
 });
 
 const commonLogger = logger.child({ module: 'common' });
