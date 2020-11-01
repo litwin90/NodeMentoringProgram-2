@@ -17,6 +17,13 @@ export const Config = {
         model: {
             user: 'userModel',
             group: 'groupModel',
+            refreshToken: 'refreshToken',
         },
+    },
+    auth: {
+        secret: process.env.AUTH_SECRET || 'default_secret',
+        jwtExpiration: Number(process.env.AUTH_JWT_EXPIRATION) || 120,
+        accessHeader: process.env.AUTH_ACCESS_HEADER || 'x-access-token',
+        refreshTokenExpirationDays: Number(process.env.AUTH_REFRESH_TOKEN_EXPIRATION_DAYS) || 1,
     },
 };

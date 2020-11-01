@@ -19,10 +19,9 @@ export class UserController {
         const user = await this.userService.getUserById(userId);
 
         if (!user) {
-            res.status(HttpCode.NOT_FOUND).send(`User with id: ${userId} not found`);
-            return;
+            return res.status(HttpCode.NotFound).send(`User with id: ${userId} not found`);
         }
-        res.status(HttpCode.OK).json(user);
+        return res.status(HttpCode.Ok).json(user);
     }
 
     @LogRequestData()
@@ -30,7 +29,7 @@ export class UserController {
     async createUser(req: Request, res: Response) {
         const newUser = await this.userService.createUser(req.body);
 
-        res.status(HttpCode.OK).json(newUser);
+        return res.status(HttpCode.Ok).json(newUser);
     }
 
     @LogRequestData()
@@ -42,16 +41,13 @@ export class UserController {
 
         switch (updatedDocumentsCount) {
             case 1:
-                res.status(HttpCode.OK).send(`User id: ${userId} is updated`);
-                break;
+                return res.status(HttpCode.Ok).send(`User id: ${userId} is updated`);
             case 0:
-                res.status(HttpCode.NOT_FOUND).send(`User with id: ${userId} not found`);
-                break;
+                return res.status(HttpCode.NotFound).send(`User with id: ${userId} not found`);
             default:
-                res.status(HttpCode.INTERNAL_SERVER_ERROR).send(
-                    `Smth went wrong. Updated documents count: ${updatedDocumentsCount}`,
-                );
-                break;
+                return res
+                    .status(HttpCode.InternalServerError)
+                    .send(`Smth went wrong. Updated documents count: ${updatedDocumentsCount}`);
         }
     }
 
@@ -64,16 +60,13 @@ export class UserController {
 
         switch (deletedDocumentsCount) {
             case 1:
-                res.status(HttpCode.OK).send(`User id: ${userId} is deleted`);
-                break;
+                return res.status(HttpCode.Ok).send(`User id: ${userId} is deleted`);
             case 0:
-                res.status(HttpCode.NOT_FOUND).send(`User with id: ${userId} not found`);
-                break;
+                return res.status(HttpCode.NotFound).send(`User with id: ${userId} not found`);
             default:
-                res.status(HttpCode.INTERNAL_SERVER_ERROR).send(
-                    `Smth went wrong. Deleted documents count: ${deletedDocumentsCount}`,
-                );
-                break;
+                return res
+                    .status(HttpCode.InternalServerError)
+                    .send(`Smth went wrong. Deleted documents count: ${deletedDocumentsCount}`);
         }
     }
 
@@ -84,6 +77,6 @@ export class UserController {
 
         const matchedUsers = await this.userService.autoSuggest(loginSubstring, limit);
 
-        res.status(HttpCode.OK).json(matchedUsers);
+        return res.status(HttpCode.Ok).json(matchedUsers);
     }
 }

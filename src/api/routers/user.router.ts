@@ -4,21 +4,25 @@ import { Container } from 'typedi';
 import { UserController } from '../controllers';
 import { UserMiddlewareService } from '../middlewares';
 
-const route = express.Router();
+const userRoute = express.Router();
 
-export const userRoute = (app: express.Router) => {
-    app.use('/user', route);
+export enum UserRouteName {
+    AutoSuggest = '/auto-suggest',
+}
+
+export const userRouter = (app: express.Router, appRouteName: string) => {
+    app.use(appRouteName, userRoute);
 
     const { getUserById, createUser, updateUser, deleteUser, autoSuggestUsers } = Container.get(UserController);
     const { validateCreateActionUser, validateUpdateActionUser } = Container.get(UserMiddlewareService);
 
-    route.get('/:id', getUserById);
+    userRoute.get('/:id', getUserById);
 
-    route.post('/', validateCreateActionUser, createUser);
+    userRoute.post('/', validateCreateActionUser, createUser);
 
-    route.patch('/:id', validateUpdateActionUser, updateUser);
+    userRoute.patch('/:id', validateUpdateActionUser, updateUser);
 
-    route.delete('/:id', deleteUser);
+    userRoute.delete('/:id', deleteUser);
 
-    route.post('/auto-suggest', autoSuggestUsers);
+    userRoute.post(UserRouteName.AutoSuggest, autoSuggestUsers);
 };

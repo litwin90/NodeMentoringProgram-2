@@ -11,5 +11,6 @@
     "editor.formatOnSave": true,
     "editor.formatOnPaste": false,
     "prettier.prettierPath": "./node_modules/prettier",
-    "prettier.configPath": "./.prettierrc.json"
+    "prettier.configPath": "./.prettierrc.json",
+    "importSorter.importStringConfiguration.trailingComma": "multiLine"
 }

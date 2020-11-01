@@ -29,7 +29,7 @@ async function closeServer() {
     try {
         const sequelize = Container.get(Config.injectionToken.sequelize) as Sequelize;
 
-        await sequelize.close();
+        await sequelize?.close();
         commonLogger.info('App is stopped');
     } catch (error) {
         commonLogger.error(error);

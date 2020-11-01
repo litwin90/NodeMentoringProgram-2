@@ -1,16 +1,20 @@
-import * as express from 'express';
+import { Router } from 'express';
 import Container from 'typedi';
 
 import { UserGroupController } from '../controllers';
 import { UserGroupsMiddlewareService } from '../middlewares';
 
-const route = express.Router();
+const userGroupRoute = Router();
 
-export const userGroupRouter = (app: express.Router) => {
-    app.use('/user-group', route);
+export enum UserGroupRouteName {
+    AddUsersToGroup = '/add-users-to-group',
+}
+
+export const userGroupRouter = (app: Router, appRouteName: string) => {
+    app.use(appRouteName, userGroupRoute);
 
     const { addUsersToGroup } = Container.get(UserGroupController);
     const { validateAddUserToGroupRequest } = Container.get(UserGroupsMiddlewareService);
 
-    route.post('/add-users-to-group', validateAddUserToGroupRequest, addUsersToGroup);
+    userGroupRoute.post(UserGroupRouteName.AddUsersToGroup, validateAddUserToGroupRequest, addUsersToGroup);
 };
