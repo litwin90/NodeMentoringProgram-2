@@ -1,4 +1,7 @@
+import dotenv from 'dotenv';
 import { Dialect } from 'sequelize';
+
+dotenv.config();
 
 export const Config = {
     port: Number(process.env.PORT),
@@ -26,4 +29,5 @@ export const Config = {
         accessHeader: process.env.AUTH_ACCESS_HEADER || 'x-access-token',
         refreshTokenExpirationDays: Number(process.env.AUTH_REFRESH_TOKEN_EXPIRATION_DAYS) || 1,
     },
+    isLoggingEnabled: process.env.LOG_ENABLED === 'true',
 };

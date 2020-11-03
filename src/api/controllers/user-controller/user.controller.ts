@@ -1,19 +1,17 @@
 import { Request, Response } from 'express';
-import { Service } from 'typedi';
+import Container, { Service } from 'typedi';
 
-import { HandleError, LogRequestData } from '../../decorators';
-import { UserService } from '../../services';
-import { HttpCode } from '../constants';
+import { HandleError, LogRequestData } from '../../../decorators';
+import { UserService } from '../../../services';
+import { HttpCode } from '../../constants';
 
 @Service()
 export class UserController {
-    constructor(public userService: UserService) {
-        console.log('UserController');
-    }
+    userService = Container.get(UserService);
 
     @LogRequestData()
     @HandleError()
-    async getUserById(req: Request, res: Response) {
+    async getUserById(req: Pick<Request, 'params'>, res: Response) {
         const userId = req.params.id;
 
         const user = await this.userService.getUserById(userId);
@@ -26,7 +24,7 @@ export class UserController {
 
     @LogRequestData()
     @HandleError()
-    async createUser(req: Request, res: Response) {
+    async createUser(req: Pick<Request, 'body'>, res: Response) {
         const newUser = await this.userService.createUser(req.body);
 
         return res.status(HttpCode.Ok).json(newUser);
@@ -34,7 +32,7 @@ export class UserController {
 
     @LogRequestData()
     @HandleError()
-    async updateUser(req: Request, res: Response) {
+    async updateUser(req: Pick<Request, 'body' | 'params'>, res: Response) {
         const userId = req.params.id;
 
         const [updatedDocumentsCount] = await this.userService.updateUser(userId, req.body);
@@ -53,7 +51,7 @@ export class UserController {
 
     @LogRequestData()
     @HandleError()
-    async deleteUser(req: Request, res: Response) {
+    async deleteUser(req: Pick<Request, 'params'>, res: Response) {
         const userId = req.params.id;
 
         const deletedDocumentsCount = await this.userService.deleteUser(userId);
@@ -72,7 +70,7 @@ export class UserController {
 
     @LogRequestData()
     @HandleError()
-    async autoSuggestUsers(req: Request, res: Response) {
+    async autoSuggestUsers(req: Pick<Request, 'body'>, res: Response) {
         const { loginSubstring, limit } = req.body;
 
         const matchedUsers = await this.userService.autoSuggest(loginSubstring, limit);

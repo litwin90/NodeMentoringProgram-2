@@ -1,17 +1,7 @@
 {
     "env": {
         "HOST": "localhost",
-        "PORT": "3000",
-        "DB_HOST": "dumbo.db.elephantsql.com",
-        "DB_USER": "skbhvecm",
-        "DB_NAME": "skbhvecm",
-        "DB_PORT": 5432,
-        "DB_PASS": "TX6ovqDnisTDfEWL4mkxNdup9fN_VX3O",
-        "DB_DIALECT": "postgres",
-        "AUTH_SECRET": "very_complex_secret",
-        "AUTH_JWT_EXPIRATION": 120,
-        "AUTH_ACCESS_HEADER": "x-custom-access-header",
-        "AUTH_REFRESH_TOKEN_EXPIRATION_DAYS": 1
+        "PORT": "3000"
     },
     "ext": "ts",
     "restartable": "rs",
